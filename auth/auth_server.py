@@ -11,7 +11,16 @@ import uuid
 import os
 from datetime import datetime, timedelta
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(title="Monitor Auth Server", version="2.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 JWT_SECRET  = os.environ.get("JWT_SECRET",  "cambiar_en_produccion_32chars_min")
 ADMIN_KEY   = os.environ.get("ADMIN_KEY",   "clave_admin_secreta")
